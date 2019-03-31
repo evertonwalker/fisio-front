@@ -14,15 +14,20 @@ import { HomeComponent } from './home/home.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { PatientGridComponent } from './patient-grid/patient-grid.component';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { ExerciseGridComponent } from './exercise-grid/exercise-grid.component';
+import { HttpClientModule }    from '@angular/common/http';
+import { ExerciseService } from './exercise.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     HomeComponent,
-    PatientGridComponent
+    PatientGridComponent,
+    ExerciseGridComponent
   ],
   imports: [
+    HttpClientModule,
     NgxDatatableModule,
     AppRoutingModule,
     CommonModule,
@@ -39,7 +44,7 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
     AppRoutingModule
 
   ],
-  providers: [],
+  providers: [ExerciseService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

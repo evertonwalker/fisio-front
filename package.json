@@ -3,12 +3,11 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "startcell": "ng s --open --port 4201 --host 0.0.0.0 --disable-host-check"
+    "start": "ng s --proxy-config proxy.conf.json --open --host 0.0.0.0 --disable-host-check"
   },
   "private": true,
   "dependencies": {
