@@ -11,7 +11,7 @@ export class ExerciseService {
   constructor(private http: HttpClient) { }
 
   getExercises(): Observable<Exercise[]> {
-    return this.http.get<Exercise[]>('/exercise/all');  
+    return this.http.get<Exercise[]>('api/exercise/all');  
   }
 
 

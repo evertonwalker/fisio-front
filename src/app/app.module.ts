@@ -14,9 +14,12 @@ import { HomeComponent } from './home/home.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { PatientGridComponent } from './patient-grid/patient-grid.component';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
-import { ExerciseGridComponent } from './exercise-grid/exercise-grid.component';
 import { HttpClientModule }    from '@angular/common/http';
 import { ExerciseService } from './exercise.service';
+import { MaterialModule } from './material.module';
+import { ExerciseFormComponent } from './exercise/exercise-form/exercise-form.component';
+import { ExerciseGridComponent } from './exercise/exercise-grid/exercise-grid.component';
+
 
 @NgModule({
   declarations: [
@@ -24,9 +27,11 @@ import { ExerciseService } from './exercise.service';
     HeaderComponent,
     HomeComponent,
     PatientGridComponent,
-    ExerciseGridComponent
+    ExerciseGridComponent,
+    ExerciseFormComponent
   ],
   imports: [
+    MaterialModule,
     HttpClientModule,
     NgxDatatableModule,
     AppRoutingModule,

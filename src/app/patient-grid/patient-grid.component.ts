@@ -1,12 +1,13 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit, AfterViewChecked } from '@angular/core';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
+import { ExerciseService } from '../exercise.service';
 
 @Component({
   selector: 'app-patient-grid',
   templateUrl: './patient-grid.component.html',
   styleUrls: ['./patient-grid.component.css']
 })
-export class PatientGridComponent implements OnInit {
+export class PatientGridComponent implements AfterViewChecked {
 
   rows = [
     { name: 'Austin', gender: 'Male', company: 'Swimlane' },
@@ -25,15 +26,19 @@ export class PatientGridComponent implements OnInit {
 
   @ViewChild(DatatableComponent) table: DatatableComponent;
 
-  constructor() { }
+  constructor(private exerciseService: ExerciseService) { }
 
-  ngOnInit() {
-    for (let i = 0; i < 1000; i++) {
-      this.rows.push({ name: 'Austin' + i, gender: 'Female', company: 'Burger king' });
-    }
-    this.reserv = this.rows;
+  ngAfterViewChecked(): void {
+    this.exerciseService.getExercises()
+      .subscribe(result => {
+        result.forEach(ex => {
+          this.rows.push({ name: 'teste', gender: 'e', company: 'ee' });
+          this.reserv = this.rows;
+        });
+
+      }, error => console.log(error));
+    
   }
-
   updateFilter(event) {
     const val = event.target.value.toLowerCase();
 
