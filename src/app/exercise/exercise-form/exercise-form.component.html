@@ -16,14 +16,14 @@
   </div>
 
   <div class="row">
-    <form class="col-12">
+    <form class="col-12" (ngSubmit)="saveExercise()" #exerciseForm="ngForm">
       <div class="form-group">
         <label for="exampleFormControlInput1">Nome do exercício</label>
-        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Supino">
+        <input type="text"  required [(ngModel)]="exercise.name" name="name" class="form-control" id="exampleFormControlInput1" placeholder="Supino">
       </div>
       <div class="form-group">
         <label for="exampleFormControlTextarea1">Descrição do exercício</label>
-        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+        <textarea class="form-control" name="description" [(ngModel)]="exercise.description" id="exampleFormControlTextarea1" rows="3"></textarea>
       </div>
 
       <div class="row justify-content-between mt-2">
@@ -31,7 +31,7 @@
           <button class="btn btn-danger" routerLink="/exercise"> Voltar </button>
         </div>
         <div class="col-4 text-right">
-          <button class="btn btn-success" type="submit"> Salvar </button>
+          <button class="btn btn-success" type="submit" [disabled]="!exerciseForm.valid"> Salvar </button>
         </div>
       </div>
     </form>

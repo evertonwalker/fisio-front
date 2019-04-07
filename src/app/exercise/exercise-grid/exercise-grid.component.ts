@@ -4,6 +4,7 @@ import { Exercise } from '../../model/exercise.model';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { ExerciseService } from 'src/app/exercise.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-exercise-grid',
@@ -20,7 +21,7 @@ export class ExerciseGridComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
 
 
-  constructor(private exerciseService: ExerciseService) { }
+  constructor(private exerciseService: ExerciseService, private router: Router) { }
 
   ngOnInit() {
     this.exerciseService.getExercises()
@@ -38,6 +39,24 @@ export class ExerciseGridComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
+
+  editExercise(id: number) {
+    this.exerciseService.getExerciseById(id)
+      .subscribe(result => {
+        if (result) {
+          this.router.navigateByUrl(`/form-exercise/${id}`);
+        }
+      })
+  }
+
+  deleteExercise(id: number) {
+    this.exerciseService.deleteExercise(id)
+      .subscribe(result => {
+        console.log(result);
+        this.dataSource.data.splice(id, 1);
+      }, error => console.log(error))
+  }
+
 }
 
 

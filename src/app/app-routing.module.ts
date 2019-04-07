@@ -9,7 +9,8 @@ const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'patient', component: PatientGridComponent },
   { path: 'exercise', component: ExerciseGridComponent },
-  { path: 'form-exercise', component: ExerciseFormComponent }
+  { path: 'form-exercise', component: ExerciseFormComponent },
+  { path: 'form-exercise/:id', component: ExerciseFormComponent}
 ];
 
 @NgModule({

@@ -52,8 +52,8 @@
       <ng-container matColumnDef="actions">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Ações </th>
         <td mat-cell *matCellDef="let row">
-          <button class="btn btn-secondary btn-sm"> Editar </button>
-          <button class="btn btn-danger btn-sm ml-2"> Deletar </button>
+          <button class="btn btn-secondary btn-sm" (click)="editExercise(row.id)"> Editar </button>
+          <button class="btn btn-danger btn-sm ml-2" (click)="deleteExercise(row.id)"> Deletar </button>
         </td>
       </ng-container>
 
