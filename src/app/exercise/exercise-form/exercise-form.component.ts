@@ -37,7 +37,11 @@ export class ExerciseFormComponent implements OnInit {
         this.notificationService.success('Sucesso', `Exercício ${result.name} foi salvo com sucesso`, { timeOut: 4000 });
         this.exercise = new Exercise();
       }, error => {
-        this.notificationService.error('Ocorreu um erro', error.error.message, { timeOut: 5000 });
+        if(error.status === 400){
+          this.notificationService.error('Ocorreu um erro', error.error.errors[0].defaultMessage, { timeOut: 5000 });
+        } else {
+          this.notificationService.error('Ocorreu um erro', error.error.message, { timeOut: 5000 });
+        }
         console.log(error)
       });
   }
