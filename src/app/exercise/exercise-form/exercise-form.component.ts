@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Exercise } from 'src/app/model/exercise.model';
 import { ExerciseService } from 'src/app/exercise.service';
 import { ActivatedRoute } from '@angular/router';
+import { NotificationsService } from 'angular2-notifications';
 
 @Component({
   selector: 'app-exercise-form',
@@ -12,7 +13,7 @@ export class ExerciseFormComponent implements OnInit {
 
   exercise: Exercise = new Exercise();
 
-  constructor(private exerciseService: ExerciseService, private route: ActivatedRoute) { }
+  constructor(private exerciseService: ExerciseService, private route: ActivatedRoute, private notificationService: NotificationsService) { }
 
   ngOnInit() {
 
@@ -33,8 +34,12 @@ export class ExerciseFormComponent implements OnInit {
   saveExercise() {
     this.exerciseService.saveOrUpdateExercise(this.exercise)
       .subscribe(result => {
-        console.log(result.error.text);
-      }, error => console.log(error));
+        this.notificationService.success('Sucesso', `Exercício ${result.name} foi salvo com sucesso`, { timeOut: 4000 });
+        this.exercise = new Exercise();
+      }, error => {
+        this.notificationService.error('Ocorreu um erro', error.error.message, { timeOut: 5000 });
+        console.log(error)
+      });
   }
 
 

@@ -19,7 +19,7 @@ import { ExerciseService } from './exercise.service';
 import { MaterialModule } from './material.module';
 import { ExerciseFormComponent } from './exercise/exercise-form/exercise-form.component';
 import { ExerciseGridComponent } from './exercise/exercise-grid/exercise-grid.component';
-
+import { SimpleNotificationsModule, NotificationsService } from 'angular2-notifications';
 
 @NgModule({
   declarations: [
@@ -31,6 +31,7 @@ import { ExerciseGridComponent } from './exercise/exercise-grid/exercise-grid.co
     ExerciseFormComponent
   ],
   imports: [
+    SimpleNotificationsModule.forRoot(),
     MaterialModule,
     HttpClientModule,
     NgxDatatableModule,
@@ -49,7 +50,7 @@ import { ExerciseGridComponent } from './exercise/exercise-grid/exercise-grid.co
     AppRoutingModule
 
   ],
-  providers: [ExerciseService],
+  providers: [ExerciseService, NotificationsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

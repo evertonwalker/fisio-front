@@ -14,7 +14,7 @@ export class ExerciseService {
     return this.http.get<Exercise[]>('api/exercise/all');
   }
 
-  saveOrUpdateExercise(exercise: Exercise): Observable<any> {
+  saveOrUpdateExercise(exercise: Exercise): Observable<Exercise> {
     if (exercise.id > 0) {
       return this.http.put<any>(`api/exercise/${exercise.id}/update`, exercise);
     } else {

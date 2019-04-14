@@ -5,6 +5,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { ExerciseService } from 'src/app/exercise.service';
 import { Router } from '@angular/router';
+import { NotificationsService } from 'angular2-notifications';
 
 @Component({
   selector: 'app-exercise-grid',
@@ -16,12 +17,12 @@ export class ExerciseGridComponent implements OnInit {
 
   displayedColumns: string[] = ['id', 'name', 'description', 'actions'];
   dataSource: MatTableDataSource<Exercise>;
-
+  showLoading = true;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
 
-  constructor(private exerciseService: ExerciseService, private router: Router) { }
+  constructor(private exerciseService: ExerciseService, private router: Router, private notificationService: NotificationsService) { }
 
   ngOnInit() {
     this.exerciseService.getExercises()
@@ -29,6 +30,7 @@ export class ExerciseGridComponent implements OnInit {
         this.dataSource = new MatTableDataSource(result);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
+        this.showLoading = false;
       });
   }
 
@@ -51,9 +53,18 @@ export class ExerciseGridComponent implements OnInit {
 
   deleteExercise(id: number) {
     this.exerciseService.deleteExercise(id)
-      .subscribe(result => {
-        console.log(result);
-        this.dataSource.data.splice(id, 1);
+      .subscribe(() => {
+        this.notificationService.success('Alerta', 'Exercício removido com sucesso', {
+          timeOut: 4000,
+        });
+
+        let array = this.dataSource.data;
+        let findItem = array.findIndex(i => i.id === id);
+        array.splice(findItem, 1);
+        this.dataSource = new MatTableDataSource<Exercise>(array);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+
       }, error => console.log(error))
   }
 
