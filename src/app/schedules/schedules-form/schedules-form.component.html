@@ -1,0 +1,51 @@
+<div class="container">
+  <div class="row mt-3">
+    <div class="col-12">
+      <span class="display-4"> {{ getTitleSchedule()}} </span>
+    </div>
+  </div>
+
+  <div class="mt-2">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a routerLink="/">Inicio</a></li>
+        <li class="breadcrumb-item"><a routerLink="/schedule">Visualizar agendamentos</a></li>
+        <li class="breadcrumb-item active" aria-current="page">{{ getTitleSchedule() }}</li>
+      </ol>
+    </nav>
+  </div>
+
+  <div class="row">
+    <form class="col-12" (ngSubmit)="saveSchedule()" #scheduleForm="ngForm">
+      <div class="form-group">
+        <label for="exampleFormControlInput1">Data inicial</label>
+        <input class="form-control" name="startDate" type="text" mwlFlatpickr [(ngModel)]="schedule.startDate"
+          [altInput]="true" [convertModelValue]="true" [enableTime]="true" dateFormat="Y-m-dTH:i" altFormat="F j, Y H:i"
+          placeholder="Selecione a data">
+      </div>
+      <div class="form-group">
+        <label for="exampleFormControlInput1">Data final</label>
+        <input class="form-control" name="endDate" type="text" mwlFlatpickr [(ngModel)]="schedule.endDate"
+          [altInput]="true" [convertModelValue]="true" [enableTime]="true" dateFormat="Y-m-dTH:i" altFormat="F j, Y H:i"
+          placeholder="Seleciona a data">
+      </div>
+      <div class="form-group">
+        <label for="exampleFormControlInput1">Selecione Paciente</label>
+        <ngx-select  optionTextField="fullName" optionValueField="cpf" [items]="patients" name="patient" [(ngModel)]="patientId"></ngx-select>
+      </div>
+      <div class="form-group">
+        <ngx-select [items]="exercises"  optionTextField="name"  [multiple]="true" [(ngModel)]="exercisesIds" name="exercises"></ngx-select>
+      </div>
+
+      <div class="row justify-content-between mt-2">
+        <div class="col-4">
+          <button class="btn btn-danger" routerLink="/schedule"> Voltar </button>
+        </div>
+        <div class="col-4 text-right">
+          <button class="btn btn-success" type="submit" [disabled]="!scheduleForm.valid"> Salvar </button>
+        </div>
+      </div>
+    </form>
+
+
+  </div>

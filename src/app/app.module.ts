@@ -12,14 +12,20 @@ import { FlatpickrModule } from 'angularx-flatpickr';
 import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
 import { AppRoutingModule } from './/app-routing.module';
-import { PatientGridComponent } from './patient-grid/patient-grid.component';
+import { PatientGridComponent } from './patient/patient-grid/patient-grid.component';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { HttpClientModule }    from '@angular/common/http';
-import { ExerciseService } from './exercise.service';
+import { ExerciseService } from './services/exercise.service';
 import { MaterialModule } from './material.module';
 import { ExerciseFormComponent } from './exercise/exercise-form/exercise-form.component';
 import { ExerciseGridComponent } from './exercise/exercise-grid/exercise-grid.component';
 import { SimpleNotificationsModule, NotificationsService } from 'angular2-notifications';
+import { PatientService } from './services/patient.service';
+import { PatientFormComponent } from './patient/patient-form/patient-form.component';
+import { UtilService } from './services/util.service';
+import { SchedulesGridComponent } from './schedules/schedules-grid/schedules-grid.component';
+import { SchedulesFormComponent } from './schedules/schedules-form/schedules-form.component';
+import { NgxSelectModule } from 'ngx-select-ex';
 
 @NgModule({
   declarations: [
@@ -28,9 +34,13 @@ import { SimpleNotificationsModule, NotificationsService } from 'angular2-notifi
     HomeComponent,
     PatientGridComponent,
     ExerciseGridComponent,
-    ExerciseFormComponent
+    ExerciseFormComponent,
+    PatientFormComponent,
+    SchedulesGridComponent,
+    SchedulesFormComponent
   ],
   imports: [
+    NgxSelectModule,
     SimpleNotificationsModule.forRoot(),
     MaterialModule,
     HttpClientModule,
@@ -50,7 +60,7 @@ import { SimpleNotificationsModule, NotificationsService } from 'angular2-notifi
     AppRoutingModule
 
   ],
-  providers: [ExerciseService, NotificationsService],
+  providers: [ExerciseService, NotificationsService, PatientService, UtilService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

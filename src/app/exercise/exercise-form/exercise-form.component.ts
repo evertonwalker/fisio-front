@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Exercise } from 'src/app/model/exercise.model';
-import { ExerciseService } from 'src/app/exercise.service';
+import { ExerciseService } from 'src/app/services/exercise.service';
 import { ActivatedRoute } from '@angular/router';
-import { NotificationsService } from 'angular2-notifications';
+import { UtilService } from 'src/app/services/util.service';
 
 @Component({
   selector: 'app-exercise-form',
@@ -13,7 +13,8 @@ export class ExerciseFormComponent implements OnInit {
 
   exercise: Exercise = new Exercise();
 
-  constructor(private exerciseService: ExerciseService, private route: ActivatedRoute, private notificationService: NotificationsService) { }
+  constructor(private exerciseService: ExerciseService, private route: ActivatedRoute,
+    private utilService: UtilService) { }
 
   ngOnInit() {
 
@@ -34,13 +35,13 @@ export class ExerciseFormComponent implements OnInit {
   saveExercise() {
     this.exerciseService.saveOrUpdateExercise(this.exercise)
       .subscribe(result => {
-        this.notificationService.success('Sucesso', `Exercício ${result.name} foi salvo com sucesso`, { timeOut: 4000 });
+        this.utilService.succesMessage(`Exercício ${result.name} foi salvo com sucesso`);
         this.exercise = new Exercise();
       }, error => {
-        if(error.status === 400){
-          this.notificationService.error('Ocorreu um erro', error.error.errors[0].defaultMessage, { timeOut: 5000 });
+        if (error.status === 400) {
+          this.utilService.getErrosBadRequest(error.error.errors);
         } else {
-          this.notificationService.error('Ocorreu um erro', error.error.message, { timeOut: 5000 });
+          this.utilService.getErrosRule(error.error.message);
         }
         console.log(error)
       });

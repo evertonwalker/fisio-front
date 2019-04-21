@@ -1,0 +1,58 @@
+<div class="container">
+  <div class="row mt-3">
+    <div class="col-12">
+      <span class="display-4"> {{ getTitlePatient()}} </span>
+    </div>
+  </div>
+
+  <div class="mt-2">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a routerLink="/">Inicio</a></li>
+        <li class="breadcrumb-item"><a routerLink="/patient">Visualizar pacientes</a></li>
+        <li class="breadcrumb-item active" aria-current="page">{{ getTitlePatient() }}</li>
+      </ol>
+    </nav>
+  </div>
+
+  <div class="row">
+    <form class="col-12" (ngSubmit)="savePatient()" #patientForm="ngForm">
+      <div class="form-group">
+        <label for="exampleFormControlInput1">Nome Completo</label>
+        <input type="text" required [(ngModel)]="patient.fullName" name="name" class="form-control"
+          id="exampleFormControlInput1" placeholder="Roberto da silva">
+      </div>
+      <div class="form-group">
+        <label for="exampleFormControlInput1">Cpf</label>
+        <input type="text" required [(ngModel)]="patient.cpf" name="cpf" class="form-control"
+          id="exampleFormControlInput1" placeholder="123.123.123-22">
+      </div>
+      <div class="form-group">
+        <label for="exampleFormControlInput1">E-mail</label>
+        <input type="text" required [(ngModel)]="patient.email" name="email" class="form-control"
+          id="exampleFormControlInput1" placeholder="paciente@teste.com">
+      </div>
+      <div class="form-group">
+        <label for="exampleFormControlInput1">Telefone</label>
+        <input type="text" required [(ngModel)]="patient.cellPhone" name="cellphone" class="form-control"
+          id="exampleFormControlInput1" placeholder="081-99741-6223">
+      </div>
+      <div class="form-group">
+        <label for="exampleFormControlInput1">Data de nascimento</label>
+        <input type="date" required [ngModel]="dateAux | date:'yyyy-MM-dd'"
+          (ngModelChange)="patient.birthOfDate = $event" name="birthOfDate" class="form-control"
+          id="exampleFormControlInput1">
+      </div>
+
+      <div class="row justify-content-between mt-2">
+        <div class="col-4">
+          <button class="btn btn-danger" routerLink="/patient"> Voltar </button>
+        </div>
+        <div class="col-4 text-right">
+          <button class="btn btn-success" type="submit" [disabled]="!patientForm.valid"> Salvar </button>
+        </div>
+      </div>
+    </form>
+
+
+  </div>

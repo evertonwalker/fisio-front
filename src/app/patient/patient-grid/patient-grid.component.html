@@ -1,0 +1,76 @@
+<div class="container">
+
+  <!-- Title das páginas-->
+  <div class="row mt-3">
+    <div class="col-12">
+      <span class="display-4">Visualizar pacientes</span>
+    </div>
+  </div>
+
+  <div class="mt-2">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a routerLink="/">Inicio</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Visualizar pacientes</li>
+      </ol>
+    </nav>
+  </div>
+  <!-- Finalização do title das páginas-->
+
+
+  <div class="row mt-5">
+    <div class="col-12">
+      <button class="btn btn-primary" routerLink="/form-patient"> Cadastrar novo paciente</button>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-center mt-2 mb-2" *ngIf="showLoading; else tableExercise">
+    <mat-spinner></mat-spinner>
+  </div>
+
+  <ng-template #tableExercise>
+
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtro">
+    </mat-form-field>
+
+    <div class="mat-elevation-z8">
+      <table mat-table [dataSource]="dataSource" matSort>
+
+        <!-- Progress Column -->
+        <ng-container matColumnDef="fullName">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Nome </th>
+          <td mat-cell *matCellDef="let row"> {{row.fullName}} </td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="cellPhone">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Telefone </th>
+          <td mat-cell *matCellDef="let row"> {{row.cellPhone}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="email">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> E-mail </th>
+          <td mat-cell *matCellDef="let row"> {{row.email}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Ações </th>
+          <td mat-cell *matCellDef="let row">
+            <button class="btn btn-secondary btn-sm" (click)="editPatient(row.cpf)"> Editar </button>
+            <button class="btn btn-danger btn-sm ml-2" (click)="deletePatient(row.cpf)"> Deletar </button>
+          </td>
+        </ng-container>
+
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+        </tr>
+      </table>
+
+      <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+    </div>
+
+  </ng-template>
+
+</div>
