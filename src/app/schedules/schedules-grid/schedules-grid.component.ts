@@ -40,12 +40,7 @@ export class SchedulesGridComponent implements OnInit {
   }
 
   editSchedule(id: number) {
-    this.scheduleService.getScheduleById(id)
-      .subscribe(result => {
-        if (result) {
-          this.router.navigateByUrl(`/form-schedule/${id}`);
-        }
-      })
+    this.router.navigateByUrl(`/form-schedule/${id}`);
   }
 
   deleteSchedule(id: number) {

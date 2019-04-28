@@ -9,7 +9,7 @@
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a routerLink="/">Inicio</a></li>
-        <li class="breadcrumb-item"><a routerLink="/schedule">Visualizar agendamentos</a></li>
+        <li class="breadcrumb-item"><a routerLink="/schedules">Visualizar agendamentos</a></li>
         <li class="breadcrumb-item active" aria-current="page">{{ getTitleSchedule() }}</li>
       </ol>
     </nav>
@@ -33,13 +33,13 @@
         <label for="exampleFormControlInput1">Selecione Paciente</label>
         <ngx-select  optionTextField="fullName" optionValueField="cpf" [items]="patients" name="patient" [(ngModel)]="patientId"></ngx-select>
       </div>
-      <div class="form-group">
+      <div class="form-group" *ngIf="exercisesIds.length > 0">
         <ngx-select [items]="exercises"  optionTextField="name"  [multiple]="true" [(ngModel)]="exercisesIds" name="exercises"></ngx-select>
       </div>
 
       <div class="row justify-content-between mt-2">
         <div class="col-4">
-          <button class="btn btn-danger" routerLink="/schedule"> Voltar </button>
+          <button class="btn btn-danger" routerLink="/schedules"> Voltar </button>
         </div>
         <div class="col-4 text-right">
           <button class="btn btn-success" type="submit" [disabled]="!scheduleForm.valid"> Salvar </button>

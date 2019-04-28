@@ -6,6 +6,7 @@ import { Exercise } from 'src/app/model/exercise.model';
 import Schedule from 'src/app/model/schedule.model';
 import { ScheduleService } from 'src/app/services/schedule.service';
 import { UtilService } from 'src/app/services/util.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-schedules-form',
@@ -18,12 +19,13 @@ export class SchedulesFormComponent implements OnInit {
   patients: Patient[];
   patientId: string;
   exercises: Exercise[];
-  exercisesIds: number[];
+  exercisesIds: number[] = [];
 
   constructor(private patientService: PatientService, private exerciseService: ExerciseService,
-    private scheduleService: ScheduleService, private utilService: UtilService) { }
+    private scheduleService: ScheduleService, private utilService: UtilService, private route: ActivatedRoute) { }
 
   ngOnInit() {
+
     this.patientService.getPatients()
       .subscribe(resultPatients => {
         this.patients = resultPatients;
@@ -33,6 +35,22 @@ export class SchedulesFormComponent implements OnInit {
       .subscribe(resultExercises => {
         this.exercises = resultExercises;
       }, error => console.log(error));
+
+
+      const id = this.route.snapshot.params.id;
+      if (id) {
+        this.scheduleService.getScheduleById(id)
+        .subscribe(resultSchedule => {
+          this.schedule = resultSchedule;
+          this.patientId = this.schedule.patient.cpf;
+          this.schedule.exercises.forEach(i => {
+            this.exercisesIds.push(i.id);
+          });
+        });
+      }
+
+      
+
   }
 
   getTitleSchedule() {
@@ -40,21 +58,20 @@ export class SchedulesFormComponent implements OnInit {
   }
 
   saveSchedule() {
-    
-    this.buildSchedule()    
-    console.log(this.schedule);
-    // this.scheduleService.saveOrUpdateSchedule(this.schedule)
-    // .subscribe(result => {
-    //   this.utilService.succesMessage(`O agendamento do paciente ${result.patient.fullName} foi salvo com sucesso.`);
-    //   this.schedule = new Schedule();
-    // }, error => {
-    //   console.log(error);
-    //   if (error.status === 400) {
-    //     this.utilService.getErrosBadRequest(error.error.errors);
-    //   } else {
-    //     this.utilService.getErrosRule(error.error.message);
-    //   }
-    // });
+
+    this.buildSchedule()
+    this.scheduleService.saveOrUpdateSchedule(this.schedule)
+      .subscribe(result => {
+        this.utilService.succesMessage(`O agendamento do paciente ${result.patient.fullName} foi salvo com sucesso.`);
+        this.schedule = new Schedule();
+      }, error => {
+        console.log(error);
+        if (error.status === 400) {
+          this.utilService.getErrosBadRequest(error.error.errors);
+        } else {
+          this.utilService.getErrosRule(error.error.message);
+        }
+      });
 
 
   }
