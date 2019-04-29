@@ -25,7 +25,7 @@ export class PatientFormComponent implements OnInit {
       this.patientService.getPatientByCpf(cpf)
         .subscribe(result => {
           this.isEdit = true;
-          this.patient = result;  
+          this.patient = result;
           this.dateAux =  `${this.patient.birthOfDate}`.split(`T`)[0];
         }, error => console.log(error));
     }
@@ -37,6 +37,7 @@ export class PatientFormComponent implements OnInit {
   }
 
   savePatient() {
+    this.patient.cpf = this.patient.cpf.replace('-', '').replace('.', '').replace('.', '');
     this.patientService.saveOrUpdatePatient(this.patient, this.isEdit)
       .subscribe(result => {
         this.utilService.succesMessage(`O paciente ${result.fullName} foi salvo com sucesso.`);
@@ -51,6 +52,4 @@ export class PatientFormComponent implements OnInit {
         }
       });
   }
-
-
 }

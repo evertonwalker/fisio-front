@@ -65,14 +65,14 @@ export class HomeComponent implements OnInit {
     this.scheduleService.getSchedules()
       .subscribe(resultSchedules => {
         resultSchedules.forEach(i => {
-          this.events.push({ start: new Date(i.startDate), end: new Date(i.endDate), title: i.patient.fullName, color: colors.blue, exercises: i.exercises })
+          this.events.push({ start: new Date(i.startDate), end: new Date(i.endDate), title: i.patient.fullName,
+             color: colors.blue, exercises: i.exercises });
         });
         // this.dayClicked((this.events[0].start).getDate());
       });
   }
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
-    console
     if (isSameMonth(date, this.viewDate)) {
       this.viewDate = date;
       if (
