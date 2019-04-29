@@ -31,11 +31,20 @@
       </div>
       <div class="form-group">
         <label for="exampleFormControlInput1">Selecione Paciente</label>
-        <ngx-select  optionTextField="fullName" optionValueField="cpf" [items]="patients" name="patient" [(ngModel)]="patientId"></ngx-select>
+        <ngx-select optionTextField="fullName" optionValueField="cpf" [items]="patients" name="patient"
+          [(ngModel)]="patientId"></ngx-select>
       </div>
-      <div class="form-group" *ngIf="exercisesIds.length > 0">
-        <ngx-select [items]="exercises"  optionTextField="name"  [multiple]="true" [(ngModel)]="exercisesIds" name="exercises"></ngx-select>
+      <div class="form-group" *ngIf="isEdit && exercisesIds.length > 0; else notEdit">
+        <ngx-select [items]="exercises" optionTextField="name" [multiple]="true" [(ngModel)]="exercisesIds"
+          name="exercises"></ngx-select>
       </div>
+      <ng-template #notEdit>
+        <div class="form-group">
+          <ngx-select [items]="exercises" optionTextField="name" [multiple]="true" [(ngModel)]="exercisesIds"
+            name="exercises"></ngx-select>
+        </div>
+      </ng-template>
+
 
       <div class="row justify-content-between mt-2">
         <div class="col-4">

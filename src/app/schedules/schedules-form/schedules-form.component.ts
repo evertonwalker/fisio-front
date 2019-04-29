@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewChecked, AfterContentChecked } from '@angular/core';
 import { PatientService } from 'src/app/services/patient.service';
 import Patient from 'src/app/model/patient.model';
 import { ExerciseService } from 'src/app/services/exercise.service';
@@ -18,6 +18,7 @@ export class SchedulesFormComponent implements OnInit {
   schedule = new Schedule();
   patients: Patient[];
   patientId: string;
+  isEdit = false;
   exercises: Exercise[];
   exercisesIds: number[] = [];
 
@@ -39,6 +40,7 @@ export class SchedulesFormComponent implements OnInit {
 
       const id = this.route.snapshot.params.id;
       if (id) {
+        this.isEdit = true;
         this.scheduleService.getScheduleById(id)
         .subscribe(resultSchedule => {
           this.schedule = resultSchedule;
@@ -64,6 +66,8 @@ export class SchedulesFormComponent implements OnInit {
       .subscribe(result => {
         this.utilService.succesMessage(`O agendamento do paciente ${result.patient.fullName} foi salvo com sucesso.`);
         this.schedule = new Schedule();
+        this.patientId = undefined;
+        this.exercisesIds = [];
       }, error => {
         console.log(error);
         if (error.status === 400) {
