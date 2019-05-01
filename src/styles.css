@@ -18,3 +18,7 @@ table {
   td, th {
     width: 25%;
   }
+
+  .responsive {
+    overflow-x: auto;
+}

@@ -12,7 +12,7 @@ import { UtilService } from 'src/app/services/util.service';
 })
 export class PatientGridComponent implements OnInit {
 
-  displayedColumns: string[] = [ 'fullName', 'cellPhone', 'email', 'actions'];
+  displayedColumns: string[] = [ 'fullName', 'cellPhone', 'email', 'edit', 'delete'];
   dataSource: MatTableDataSource<Patient>;
   showLoading = true;
   @ViewChild(MatPaginator) paginator: MatPaginator;

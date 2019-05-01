@@ -15,7 +15,7 @@ import { NotificationsService } from 'angular2-notifications';
 })
 export class ExerciseGridComponent implements OnInit {
 
-  displayedColumns: string[] = ['id', 'name', 'description', 'actions'];
+  displayedColumns: string[] = ['name', 'edit', 'delete'];
   dataSource: MatTableDataSource<Exercise>;
   showLoading = true;
   @ViewChild(MatPaginator) paginator: MatPaginator;

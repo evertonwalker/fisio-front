@@ -12,6 +12,7 @@ import { UtilService } from 'src/app/services/util.service';
 export class ExerciseFormComponent implements OnInit {
 
   exercise: Exercise = new Exercise();
+  isEdit: boolean = false;
 
   constructor(private exerciseService: ExerciseService, private route: ActivatedRoute,
     private utilService: UtilService) { }
@@ -23,13 +24,14 @@ export class ExerciseFormComponent implements OnInit {
       this.exerciseService.getExerciseById(idExercise)
         .subscribe(result => {
           this.exercise = result;
+          this.isEdit = true;
         }, error => console.log(error));
     }
 
   }
 
   getTitleExercise() {
-    return this.exercise.id > 0 ? 'Cadastrar exercício' : 'Editar exercício';
+    return this.isEdit ? 'Editar exercício' : ' Cadastrar exercício';
   }
 
   saveExercise() {

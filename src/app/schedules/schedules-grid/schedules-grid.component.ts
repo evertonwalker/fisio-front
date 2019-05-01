@@ -12,7 +12,7 @@ import { UtilService } from 'src/app/services/util.service';
 })
 export class SchedulesGridComponent implements OnInit {
 
-  displayedColumns: string[] = ['fullName', 'startDate', 'endDate', 'actions'];
+  displayedColumns: string[] = ['fullName', 'startDate', 'endDate', 'edit', 'delete'];
   dataSource: MatTableDataSource<Schedule>;
   showLoading = true;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -22,7 +22,7 @@ export class SchedulesGridComponent implements OnInit {
   constructor(private scheduleService: ScheduleService, private router: Router, private utilService: UtilService) { }
 
   ngOnInit() {
-    this.scheduleService.getSchedules()
+    this.scheduleService.getSchedulesForGrids()
       .subscribe(result => {
         this.dataSource = new MatTableDataSource(result);
         this.dataSource.paginator = this.paginator;

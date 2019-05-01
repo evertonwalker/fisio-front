@@ -21,21 +21,8 @@ import {
   CalendarView
 } from 'angular-calendar';
 import { ScheduleService } from '../services/schedule.service';
+import { Observable } from 'rxjs';
 
-const colors: any = {
-  red: {
-    primary: '#ad2121',
-    secondary: '#FAE3E3'
-  },
-  blue: {
-    primary: '#1e90ff',
-    secondary: '#D1E8FF'
-  },
-  yellow: {
-    primary: '#e3bc08',
-    secondary: '#FDF1BA'
-  }
-};
 
 
 @Component({
@@ -56,20 +43,13 @@ export class HomeComponent implements OnInit {
     event: CalendarEvent;
   };
 
-  events: CalendarEvent[] = [];
-  activeDayIsOpen = true;
+  events$: Observable<Array<CalendarEvent<any>>>;
+  activeDayIsOpen = false;
 
   constructor(private modal: NgbModal, private scheduleService: ScheduleService) { }
 
   ngOnInit() {
-    this.scheduleService.getSchedules()
-      .subscribe(resultSchedules => {
-        resultSchedules.forEach(i => {
-          this.events.push({ start: new Date(i.startDate), end: new Date(i.endDate), title: i.patient.fullName,
-             color: colors.blue, exercises: i.exercises });
-        });
-        // this.dayClicked((this.events[0].start).getDate());
-      });
+    this.events$ = this.scheduleService.getSchedules();
   }
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {

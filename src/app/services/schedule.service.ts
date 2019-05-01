@@ -2,6 +2,23 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import Schedule from '../model/schedule.model';
+import { map } from 'rxjs/operators';
+
+
+const colors: any = {
+  red: {
+    primary: '#ad2121',
+    secondary: '#FAE3E3'
+  },
+  blue: {
+    primary: '#1e90ff',
+    secondary: '#D1E8FF'
+  },
+  yellow: {
+    primary: '#e3bc08',
+    secondary: '#FDF1BA'
+  }
+};
 
 @Injectable({
   providedIn: 'root'
@@ -10,8 +27,23 @@ export class ScheduleService {
 
   constructor(private http: HttpClient) { }
 
-  getSchedules(): Observable<Schedule[]>{
-    return this.http.get<Schedule[]>(`api/schedule/`)
+  getSchedulesForGrids(): Observable<Schedule[]> {
+    return this.http.get<Schedule[]>(`api/schedule/`);
+  }
+
+  getSchedules() {
+    return this.http.get<Schedule[]>(`api/schedule/`).pipe(
+      map(result => {
+        let events = [];
+        result.forEach(i => {
+          events.push({
+            start: new Date(i.startDate), end: new Date(i.endDate), title: i.patient.fullName, patient: i.patient,
+            color: colors.blue, exercises: i.exercises
+          });
+        });
+        return events;
+      })
+    )
   }
 
   getScheduleById(id: number): Observable<Schedule> {

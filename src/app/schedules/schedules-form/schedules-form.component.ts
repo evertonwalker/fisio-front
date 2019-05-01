@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewChecked, AfterContentChecked } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { PatientService } from 'src/app/services/patient.service';
 import Patient from 'src/app/model/patient.model';
 import { ExerciseService } from 'src/app/services/exercise.service';
@@ -38,10 +38,10 @@ export class SchedulesFormComponent implements OnInit {
       }, error => console.log(error));
 
 
-      const id = this.route.snapshot.params.id;
-      if (id) {
-        this.isEdit = true;
-        this.scheduleService.getScheduleById(id)
+    const id = this.route.snapshot.params.id;
+    if (id) {
+      this.isEdit = true;
+      this.scheduleService.getScheduleById(id)
         .subscribe(resultSchedule => {
           this.schedule = resultSchedule;
           this.patientId = this.schedule.patient.cpf;
@@ -49,9 +49,9 @@ export class SchedulesFormComponent implements OnInit {
             this.exercisesIds.push(i.id);
           });
         });
-      }
+    }
 
-      
+
 
   }
 

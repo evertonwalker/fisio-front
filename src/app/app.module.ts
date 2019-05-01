@@ -26,6 +26,10 @@ import { UtilService } from './services/util.service';
 import { SchedulesGridComponent } from './schedules/schedules-grid/schedules-grid.component';
 import { SchedulesFormComponent } from './schedules/schedules-form/schedules-form.component';
 import { NgxSelectModule } from 'ngx-select-ex';
+import { registerLocaleData } from '@angular/common';
+import localeBr from '@angular/common/locales/pt';
+
+registerLocaleData(localeBr, 'pt');
 
 @NgModule({
   declarations: [
