@@ -6,6 +6,18 @@
 @import '~@swimlane/ngx-datatable/release/assets/icons.css';
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+footer {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
 table {
     width: 100%;
   }

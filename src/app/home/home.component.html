@@ -27,7 +27,7 @@
   </div>
 </ng-template>
 
-<div class="container mt-3 ">
+<div class="container mt-3">
   <div class="row text-center">
     <div class="col-md-4">
       <div class="btn-group">
@@ -70,7 +70,7 @@
   </ng-template>
 
 
-  <div *ngIf="events$ | async; else loading; let events">
+  <div *ngIf="events$ | async; else loading; let events" class="mb-5">
     <div [ngSwitch]="view">
       <mwl-calendar-month-view *ngSwitchCase="CalendarView.Month" [viewDate]="viewDate" [events]="events"
         [refresh]="refresh" [activeDayIsOpen]="activeDayIsOpen" (dayClicked)="dayClicked($event.day)"

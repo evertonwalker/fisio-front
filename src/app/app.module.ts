@@ -28,6 +28,7 @@ import { SchedulesFormComponent } from './schedules/schedules-form/schedules-for
 import { NgxSelectModule } from 'ngx-select-ex';
 import { registerLocaleData } from '@angular/common';
 import localeBr from '@angular/common/locales/pt';
+import { FooterComponent } from './footer/footer.component';
 
 registerLocaleData(localeBr, 'pt');
 
@@ -41,7 +42,8 @@ registerLocaleData(localeBr, 'pt');
     ExerciseFormComponent,
     PatientFormComponent,
     SchedulesGridComponent,
-    SchedulesFormComponent
+    SchedulesFormComponent,
+    FooterComponent
   ],
   imports: [
     NgxSelectModule,

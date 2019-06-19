@@ -29,10 +29,11 @@
   </div>
 
   <ng-template #tableExercise>
-
-    <mat-form-field>
-      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtro">
-    </mat-form-field>
+    <div class="mt-2">
+      <mat-form-field>
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtro">
+      </mat-form-field>
+    </div>
 
     <div class="mat-elevation-z8 responsive">
       <table mat-table [dataSource]="dataSource" matSort>
