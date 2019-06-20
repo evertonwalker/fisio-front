@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container mb-5">
   <div class="row mt-3">
     <div class="col-12">
       <span class="display-4"> {{ getTitlePatient()}} </span>
@@ -19,29 +19,43 @@
     <form class="col-12" (ngSubmit)="savePatient()" #patientForm="ngForm">
       <div class="form-group">
         <label for="exampleFormControlInput1">Nome Completo</label>
-        <input type="text" required [(ngModel)]="patient.fullName" name="name" class="form-control"
-          id="exampleFormControlInput1" placeholder="Roberto da silva">
+        <input type="text" required [(ngModel)]="patient.fullName" #name="ngModel" name="name" class="form-control"
+          placeholder="Roberto da...">
+        <small class="text-danger mt-2" *ngIf="name.errors?.required && name.touched">
+          Nome é obrigatório.
+        </small>
       </div>
       <div class="form-group">
         <label for="exampleFormControlInput1">Cpf</label>
-        <input type="text" required [(ngModel)]="patient.cpf" name="cpf" class="form-control"
-          id="exampleFormControlInput1" placeholder="123.123.123-22">
+        <input type="text" required [(ngModel)]="patient.cpf" #cpf="ngModel" name="cpf" class="form-control"
+          placeholder="123.123.123-22">
+        <small class="text-danger mt-2" *ngIf="cpf.errors?.required && cpf.touched">
+          Cpf é obrigatório.
+        </small>
       </div>
       <div class="form-group">
         <label for="exampleFormControlInput1">E-mail</label>
-        <input type="text" required [(ngModel)]="patient.email" name="email" class="form-control"
-          id="exampleFormControlInput1" placeholder="paciente@teste.com">
+        <input type="text" required [(ngModel)]="patient.email" #email="ngModel" name="email" class="form-control"
+          placeholder="paciente@teste.com">
+        <small class="text-danger mt-2" *ngIf="email.errors?.required && email.touched">
+          E-mail é obrigatório.
+        </small>
       </div>
       <div class="form-group">
         <label for="exampleFormControlInput1">Telefone</label>
-        <input type="text" required [(ngModel)]="patient.cellPhone" name="cellphone" class="form-control"
-          id="exampleFormControlInput1" placeholder="081-99741-6223">
+        <input type="number" required [(ngModel)]="patient.cellPhone" #phone="ngModel" name="cellphone"
+          class="form-control" id="exampleFormControlInput1" placeholder="997416223">
+        <small class="text-danger mt-2" *ngIf="phone.errors?.required && phone.touched">
+          Telefone é obrigatório.
+        </small>
       </div>
       <div class="form-group">
         <label for="exampleFormControlInput1">Data de nascimento</label>
         <input type="date" required [ngModel]="dateAux | date:'yyyy-MM-dd'"
-          (ngModelChange)="patient.birthOfDate = $event" name="birthOfDate" class="form-control"
-          id="exampleFormControlInput1">
+          (ngModelChange)="patient.birthOfDate = $event" name="birthOfDate" class="form-control" #birthOfDate="ngModel">
+        <small class="text-danger mt-2" *ngIf="birthOfDate.errors?.required && birthOfDate.touched">
+          Data de nascimento é obrigatória.
+        </small>
       </div>
 
       <div class="row justify-content-between mt-2">
@@ -56,3 +70,4 @@
 
 
   </div>
+</div>

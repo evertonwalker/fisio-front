@@ -62,14 +62,6 @@
             <button class="btn btn-secondary btn-sm" (click)="editSchedule(row.id)"> Editar </button>
           </td>
         </ng-container>
-
-        <ng-container matColumnDef="delete">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Deletar </th>
-          <td mat-cell *matCellDef="let row">
-            <button class="btn btn-danger btn-sm ml-2" (click)="deleteSchedule(row.id)"> Deletar </button>
-          </td>
-        </ng-container>
-
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;">
         </tr>

@@ -21,6 +21,8 @@ export class SchedulesFormComponent implements OnInit {
   isEdit = false;
   exercises: Exercise[];
   exercisesIds: number[] = [];
+  notPatient = 'Nenhum paciente encontrado';
+  notExercises = 'Nehum exercício encontrado.';
 
   constructor(private patientService: PatientService, private exerciseService: ExerciseService,
     private scheduleService: ScheduleService, private utilService: UtilService, private route: ActivatedRoute) { }

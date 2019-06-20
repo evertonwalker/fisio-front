@@ -12,7 +12,7 @@ import { UtilService } from 'src/app/services/util.service';
 })
 export class SchedulesGridComponent implements OnInit {
 
-  displayedColumns: string[] = ['fullName', 'startDate', 'endDate', 'edit', 'delete'];
+  displayedColumns: string[] = ['fullName', 'startDate', 'endDate', 'edit'];
   dataSource: MatTableDataSource<Schedule>;
   showLoading = true;
   @ViewChild(MatPaginator) paginator: MatPaginator;

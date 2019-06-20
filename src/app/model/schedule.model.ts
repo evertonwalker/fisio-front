@@ -7,4 +7,6 @@ export default class Schedule {
     endDate: Date;
     exercises: Exercise[];
     patient: Patient;
+    color: string = "#1e90ff";
+    status: string = 'Ativo';
 }

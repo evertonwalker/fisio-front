@@ -38,7 +38,10 @@ export class ScheduleService {
         result.forEach(i => {
           events.push({
             start: new Date(i.startDate), end: new Date(i.endDate), title: i.patient.fullName, patient: i.patient,
-            color: colors.blue, exercises: i.exercises
+            color: {
+              primary: i.color,
+              secondary: '#D1E8FF'
+            }, exercises: i.exercises
           });
         });
         return events;
